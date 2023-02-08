@@ -1,0 +1,714 @@
+[
+    {
+        "id": "964db5f8401ebfac",
+        "type": "tab",
+        "label": "listener",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "258b1fca3e7e2415",
+        "type": "tab",
+        "label": "decode",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6da3a61d65c18cea",
+        "type": "tab",
+        "label": "store",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "710f477a44faa728",
+        "type": "tab",
+        "label": "display",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "80d86a2ff0471c49",
+        "type": "ui_tab",
+        "name": "ADS-B Plane Spotter - Stir Trek 2023",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5195689fbf66dada",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#26a269",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "ADS-B Plane Spotter",
+            "hideToolbar": "true",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "90c366e1f6ef5f1b",
+        "type": "ui_group",
+        "name": "Map",
+        "tab": "80d86a2ff0471c49",
+        "order": 1,
+        "disp": false,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d7593c948cf7a393",
+        "type": "ui_group",
+        "name": "Stats",
+        "tab": "80d86a2ff0471c49",
+        "order": 2,
+        "disp": false,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "002e546d6f6e3596",
+        "type": "exec",
+        "z": "964db5f8401ebfac",
+        "command": "rtl_adsb",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "51a877e067d905fc",
+                "9a2160449469befe"
+            ],
+            [
+                "5f77d4af461e3df6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "15864d88c62771de",
+        "type": "inject",
+        "z": "964db5f8401ebfac",
+        "name": "Initiate",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "002e546d6f6e3596"
+            ]
+        ]
+    },
+    {
+        "id": "f282023fc048bdce",
+        "type": "debug",
+        "z": "964db5f8401ebfac",
+        "name": "data stream",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "51a877e067d905fc",
+        "type": "split",
+        "z": "964db5f8401ebfac",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "dd763e01f31d1c40"
+            ]
+        ]
+    },
+    {
+        "id": "5f77d4af461e3df6",
+        "type": "debug",
+        "z": "964db5f8401ebfac",
+        "name": "startup messages",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c8e0e070ae899710",
+        "type": "link out",
+        "z": "964db5f8401ebfac",
+        "name": "raw msg src",
+        "mode": "link",
+        "links": [
+            "e0b2c87d2c22bc3e"
+        ],
+        "x": 705,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f21becbd994fca3e",
+        "type": "function",
+        "z": "964db5f8401ebfac",
+        "name": "-> buffer",
+        "func": "\nmsg.payload = hexArray.fromString(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "hexArray",
+                "module": "hex-array"
+            }
+        ],
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "f282023fc048bdce",
+                "c8e0e070ae899710"
+            ]
+        ]
+    },
+    {
+        "id": "dd763e01f31d1c40",
+        "type": "function",
+        "z": "964db5f8401ebfac",
+        "name": "trim",
+        "func": "msg.payload = msg.payload.replace(/[^0-9a-fA-F]/g, '');\nreturn msg.payload ? msg : null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "f21becbd994fca3e"
+            ]
+        ]
+    },
+    {
+        "id": "9a2160449469befe",
+        "type": "function",
+        "z": "964db5f8401ebfac",
+        "name": "raw msg count",
+        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn {topic:'Raw Msg Count', payload: count};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 60,
+        "wires": [
+            [
+                "029433687e3d10d2"
+            ]
+        ]
+    },
+    {
+        "id": "029433687e3d10d2",
+        "type": "ui_text",
+        "z": "964db5f8401ebfac",
+        "group": "d7593c948cf7a393",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "raw cnt",
+        "label": "{{msg.topic}}",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 700,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e0b2c87d2c22bc3e",
+        "type": "link in",
+        "z": "258b1fca3e7e2415",
+        "name": "decode in",
+        "links": [
+            "c8e0e070ae899710"
+        ],
+        "x": 135,
+        "y": 160,
+        "wires": [
+            [
+                "11c9b81aca5a3024"
+            ]
+        ]
+    },
+    {
+        "id": "33c8df46175ca626",
+        "type": "debug",
+        "z": "258b1fca3e7e2415",
+        "name": "data stream",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "11c9b81aca5a3024",
+        "type": "function",
+        "z": "258b1fca3e7e2415",
+        "name": "decode mode-s msg",
+        "func": "const decoder = new modeSDecoder();\nmsg.payload = decoder.parse(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "modeSDecoder",
+                "module": "mode-s-decoder"
+            }
+        ],
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "19d2ba4fa203e942"
+            ]
+        ]
+    },
+    {
+        "id": "19d2ba4fa203e942",
+        "type": "function",
+        "z": "258b1fca3e7e2415",
+        "name": "filter bad crc",
+        "func": "\nreturn msg.payload.crcOk ? msg : null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "33c8df46175ca626",
+                "5937530f00805773",
+                "f6d263cbbb6b79e4"
+            ]
+        ]
+    },
+    {
+        "id": "5937530f00805773",
+        "type": "link out",
+        "z": "258b1fca3e7e2415",
+        "name": "decoded src",
+        "mode": "link",
+        "links": [
+            "53326059ab6f32f0"
+        ],
+        "x": 625,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f6d263cbbb6b79e4",
+        "type": "function",
+        "z": "258b1fca3e7e2415",
+        "name": "decoded msg count",
+        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn { topic: 'Decoded Msg Count', payload: count };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 320,
+        "wires": [
+            [
+                "12af7a029c36ce92"
+            ]
+        ]
+    },
+    {
+        "id": "12af7a029c36ce92",
+        "type": "ui_text",
+        "z": "258b1fca3e7e2415",
+        "group": "d7593c948cf7a393",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "decoded cnt",
+        "label": "{{msg.topic}}",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 650,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c320232d6f4e65ba",
+        "type": "function",
+        "z": "6da3a61d65c18cea",
+        "name": "store",
+        "func": "const store = context.get('store') || new modeSAircraftStore({ ttimeout: 120000 });\nstore.addMessage(msg.payload);\ncontext.set('store', store);\n\nmsg.payload = store.getAircrafts();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "modeSAircraftStore",
+                "module": "mode-s-aircraft-store"
+            }
+        ],
+        "x": 250,
+        "y": 80,
+        "wires": [
+            [
+                "7414e495a0727518",
+                "764dd5b1f331d4f6"
+            ]
+        ]
+    },
+    {
+        "id": "53326059ab6f32f0",
+        "type": "link in",
+        "z": "6da3a61d65c18cea",
+        "name": "store in",
+        "links": [
+            "5937530f00805773"
+        ],
+        "x": 115,
+        "y": 120,
+        "wires": [
+            [
+                "c320232d6f4e65ba"
+            ]
+        ]
+    },
+    {
+        "id": "2893528569d7a56b",
+        "type": "debug",
+        "z": "6da3a61d65c18cea",
+        "name": "data stream",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7414e495a0727518",
+        "type": "function",
+        "z": "6da3a61d65c18cea",
+        "name": "aircraft count",
+        "func": "msg.topic = \"Aircraft Db Size\";\nmsg.payload = msg.payload.length;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "03bcfba47aa6db2d"
+            ]
+        ]
+    },
+    {
+        "id": "764dd5b1f331d4f6",
+        "type": "split",
+        "z": "6da3a61d65c18cea",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "2893528569d7a56b",
+                "ceae6a9de7f5f0eb"
+            ]
+        ]
+    },
+    {
+        "id": "ceae6a9de7f5f0eb",
+        "type": "link out",
+        "z": "6da3a61d65c18cea",
+        "name": "aircraft src",
+        "mode": "link",
+        "links": [
+            "3ae6211922f7134f"
+        ],
+        "x": 645,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "03bcfba47aa6db2d",
+        "type": "ui_text",
+        "z": "6da3a61d65c18cea",
+        "group": "d7593c948cf7a393",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "stored cnt",
+        "label": "{{msg.topic}}",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 540,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7b8b023865393063",
+        "type": "ui_worldmap",
+        "z": "710f477a44faa728",
+        "group": "90c366e1f6ef5f1b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 620,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3ae6211922f7134f",
+        "type": "link in",
+        "z": "710f477a44faa728",
+        "name": "display in",
+        "links": [
+            "ceae6a9de7f5f0eb"
+        ],
+        "x": 145,
+        "y": 100,
+        "wires": [
+            [
+                "be01aeb580340311"
+            ]
+        ]
+    },
+    {
+        "id": "cd5581187ae307dc",
+        "type": "function",
+        "z": "710f477a44faa728",
+        "name": "-> mapable",
+        "func": "\nreturn {\n topic: 'aircraft record',\n payload: {\n        name: msg.payload.callsign,\n     lat: msg.payload.lat,\n     lon: msg.payload.lng,\n     heading: msg.payload.heading,\n        icon: 'plane'\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "7b8b023865393063",
+                "53f27d3bd77eead0"
+            ]
+        ]
+    },
+    {
+        "id": "53f27d3bd77eead0",
+        "type": "debug",
+        "z": "710f477a44faa728",
+        "name": "data stream",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "be01aeb580340311",
+        "type": "function",
+        "z": "710f477a44faa728",
+        "name": "filter mapable",
+        "func": "\nreturn msg.payload.callsign && (msg.payload.lat  * msg.payload.lng) != 0? msg : null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "cd5581187ae307dc"
+            ]
+        ]
+    }
+]

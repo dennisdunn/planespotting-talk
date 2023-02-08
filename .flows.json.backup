@@ -1,0 +1,81 @@
+[
+    {
+        "id": "d3fe3c5fafdccd4f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7b402982a79fd325",
+        "type": "exec",
+        "z": "d3fe3c5fafdccd4f",
+        "command": "rtl_sdr",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "ce977b13ad7c4f30"
+            ],
+            [
+                "ce977b13ad7c4f30"
+            ],
+            [
+                "ce977b13ad7c4f30"
+            ]
+        ]
+    },
+    {
+        "id": "ce977b13ad7c4f30",
+        "type": "debug",
+        "z": "d3fe3c5fafdccd4f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b5b1a73d9ec5c6f7",
+        "type": "inject",
+        "z": "d3fe3c5fafdccd4f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "7b402982a79fd325"
+            ]
+        ]
+    }
+]
