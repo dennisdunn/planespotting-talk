@@ -1,0 +1,9 @@
+services:
+  app:
+    image: node-red-sdr
+    build: ./docker
+    ports: 
+      - "1880:1880"
+    volumes: 
+      - "./app:/data"
+

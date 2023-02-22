@@ -32,6 +32,14 @@
         "env": []
     },
     {
+        "id": "671265796388cccb",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "80d86a2ff0471c49",
         "type": "ui_tab",
         "name": "ADS-B Plane Spotter - Stir Trek 2023",
