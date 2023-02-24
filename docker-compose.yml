@@ -6,4 +6,6 @@ services:
       - "1880:1880"
     volumes: 
       - "./app:/data"
+    devices:
+      - "/dev/bus/usb/001"
 
