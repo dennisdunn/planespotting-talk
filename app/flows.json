@@ -32,6 +32,14 @@
         "env": []
     },
     {
+        "id": "512c18dc94e9b9f2",
+        "type": "tab",
+        "label": "dash",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "5195689fbf66dada",
         "type": "ui_base",
         "theme": {
@@ -128,6 +136,36 @@
                 "py": 0
             }
         }
+    },
+    {
+        "id": "e9c61b6c290bbeef",
+        "type": "ui_group",
+        "name": "Map",
+        "tab": "29f52fb48096fb5b",
+        "order": 1,
+        "disp": false,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "29f52fb48096fb5b",
+        "type": "ui_tab",
+        "name": "Plane Spotter",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d8125f5c6daaf7c1",
+        "type": "ui_group",
+        "name": "Metrics",
+        "tab": "29f52fb48096fb5b",
+        "order": 2,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "28bdde5d389c0f33",
@@ -237,7 +275,9 @@
         "z": "671265796388cccb",
         "name": "source out metrics",
         "mode": "link",
-        "links": [],
+        "links": [
+            "cdf71fb3e31eee3d"
+        ],
         "x": 645,
         "y": 300,
         "wires": []
@@ -419,7 +459,9 @@
         "z": "258b1fca3e7e2415",
         "name": "decode out metric",
         "mode": "link",
-        "links": [],
+        "links": [
+            "cdf71fb3e31eee3d"
+        ],
         "x": 675,
         "y": 300,
         "wires": []
@@ -569,7 +611,9 @@
         "z": "6da3a61d65c18cea",
         "name": "store out metric",
         "mode": "link",
-        "links": [],
+        "links": [
+            "cdf71fb3e31eee3d"
+        ],
         "x": 605,
         "y": 300,
         "wires": []
@@ -678,9 +722,9 @@
         "id": "bd08034bf1935712",
         "type": "comment",
         "z": "710f477a44faa728",
-        "name": "create mappable objects",
+        "name": "map the aircraft",
         "info": "",
-        "x": 150,
+        "x": 120,
         "y": 40,
         "wires": []
     },
@@ -688,9 +732,11 @@
         "id": "c0fad167ebdb37d3",
         "type": "link out",
         "z": "710f477a44faa728",
-        "name": "generate out",
+        "name": "map out",
         "mode": "link",
-        "links": [],
+        "links": [
+            "f4812cfef757a9d5"
+        ],
         "x": 555,
         "y": 260,
         "wires": []
@@ -725,6 +771,221 @@
         "mapwms": false,
         "x": 600,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "7d947304f0096453",
+        "type": "ui_worldmap",
+        "z": "512c18dc94e9b9f2",
+        "group": "e9c61b6c290bbeef",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "39.38",
+        "lon": "-95.58",
+        "zoom": "4",
+        "layer": "OSMC",
+        "cluster": "5",
+        "maxage": "120",
+        "usermenu": "hide",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/dashmap",
+        "overlist": "AC,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriT",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 540,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f4812cfef757a9d5",
+        "type": "link in",
+        "z": "512c18dc94e9b9f2",
+        "name": "dash in",
+        "links": [
+            "c0fad167ebdb37d3"
+        ],
+        "x": 125,
+        "y": 120,
+        "wires": [
+            [
+                "7d947304f0096453"
+            ]
+        ]
+    },
+    {
+        "id": "4681187b1ea43383",
+        "type": "comment",
+        "z": "512c18dc94e9b9f2",
+        "name": "monitor the data with a dashboard",
+        "info": "",
+        "x": 160,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cdf71fb3e31eee3d",
+        "type": "link in",
+        "z": "512c18dc94e9b9f2",
+        "name": "dash in metric",
+        "links": [
+            "1986145c08fccd2e",
+            "741e11795aa36009",
+            "8620df5a1314021e"
+        ],
+        "x": 105,
+        "y": 220,
+        "wires": [
+            [
+                "8fce727ed7978580",
+                "deb898041f45ca1f"
+            ]
+        ]
+    },
+    {
+        "id": "047aa5d3fcd29b98",
+        "type": "ui_text",
+        "z": "512c18dc94e9b9f2",
+        "group": "d8125f5c6daaf7c1",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Aircraft DB Size",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 560,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8fce727ed7978580",
+        "type": "debug",
+        "z": "512c18dc94e9b9f2",
+        "name": "dash",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "deb898041f45ca1f",
+        "type": "switch",
+        "z": "512c18dc94e9b9f2",
+        "name": "dispatch",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "metric/total-msg-cnt",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "metric/decode-msg-cnt",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "metric/decode-err-cnt",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "metric/aircraft-db-size",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "85c3a0ab65f91835"
+            ],
+            [
+                "d0d9b238b1302f1f"
+            ],
+            [
+                "76bcbf0a1494995f"
+            ],
+            [
+                "047aa5d3fcd29b98"
+            ]
+        ]
+    },
+    {
+        "id": "85c3a0ab65f91835",
+        "type": "ui_text",
+        "z": "512c18dc94e9b9f2",
+        "group": "d8125f5c6daaf7c1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Total Msgs",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 550,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d0d9b238b1302f1f",
+        "type": "ui_text",
+        "z": "512c18dc94e9b9f2",
+        "group": "d8125f5c6daaf7c1",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Decoded Msgs",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 560,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "76bcbf0a1494995f",
+        "type": "ui_text",
+        "z": "512c18dc94e9b9f2",
+        "group": "d8125f5c6daaf7c1",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Decode Errors",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 560,
+        "y": 280,
         "wires": []
     }
 ]
