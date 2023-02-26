@@ -571,10 +571,10 @@
         "type": "function",
         "z": "6da3a61d65c18cea",
         "name": "store mode-s message",
-        "func": "const store = context.get('store') || new modeSAircraftStore({ ttimeout: 120000 });\nstore.addMessage(msg.payload);\ncontext.set('store', store);\n\nmsg.payload = store.getAircrafts();\nreturn msg;",
+        "func": "const store = flow.get('store');\nstore.addMessage(msg.payload);\nflow.set('store', store);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nconst store = flow.get('store') || new modeSAircraftStore({ timeout: 120000 });\nflow.set('store', store);\n",
         "finalize": "",
         "libs": [
             {
@@ -582,14 +582,10 @@
                 "module": "mode-s-aircraft-store"
             }
         ],
-        "x": 220,
-        "y": 120,
+        "x": 340,
+        "y": 100,
         "wires": [
-            [
-                "764dd5b1f331d4f6",
-                "1f99384bfd6a3e53",
-                "7414e495a0727518"
-            ]
+            []
         ]
     },
     {
@@ -600,8 +596,8 @@
         "links": [
             "5937530f00805773"
         ],
-        "x": 95,
-        "y": 200,
+        "x": 175,
+        "y": 100,
         "wires": [
             [
                 "c320232d6f4e65ba"
@@ -620,7 +616,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 240,
+        "y": 280,
         "wires": [
             [
                 "8620df5a1314021e"
@@ -638,8 +634,8 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 430,
-        "y": 120,
+        "x": 490,
+        "y": 180,
         "wires": [
             [
                 "ceae6a9de7f5f0eb"
@@ -668,7 +664,7 @@
         "links": [
             "cdf71fb3e31eee3d"
         ],
-        "x": 555,
+        "x": 605,
         "y": 300,
         "wires": []
     },
@@ -693,13 +689,70 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
-        "y": 320,
+        "x": 440,
+        "y": 380,
         "wires": [
             [
                 "8620df5a1314021e"
             ]
         ]
+    },
+    {
+        "id": "51304f233bb8346c",
+        "type": "inject",
+        "z": "6da3a61d65c18cea",
+        "name": "trigger db dump",
+        "props": [],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "16becf48c3839f23"
+            ]
+        ]
+    },
+    {
+        "id": "16becf48c3839f23",
+        "type": "function",
+        "z": "6da3a61d65c18cea",
+        "name": "read aircraft store",
+        "func": "const store = flow.get('store');\nmsg.payload = store.getAircrafts();\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "764dd5b1f331d4f6",
+                "7414e495a0727518",
+                "1f99384bfd6a3e53",
+                "1e9df14add671ddb"
+            ]
+        ]
+    },
+    {
+        "id": "1e9df14add671ddb",
+        "type": "debug",
+        "z": "6da3a61d65c18cea",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 360,
+        "wires": []
     },
     {
         "id": "3ae6211922f7134f",
@@ -722,14 +775,14 @@
         "type": "function",
         "z": "710f477a44faa728",
         "name": "-> aircraft object",
-        "func": "\nreturn {\n topic: 'aircraft record',\n payload: {\n     layer: 'aircraft',\n        name: msg.payload.callsign,\n        lat: msg.payload.lat,\n        lon: msg.payload.lng,\n        heading: msg.payload.heading,\n        speed: msg.payload.speed,\n        icon: 'plane',\n        iconColor: 'black',\n        tooltip: msg.payload.callsign,\n    }\n};",
+        "func": "\nreturn {\n topic: 'aircraft record',\n payload: {\n        name: msg.payload.callsign,\n        lat: msg.payload.lat,\n        lon: msg.payload.lng,\n        heading: msg.payload.heading,\n        speed: msg.payload.speed,\n        icon: 'plane',\n        iconColor: 'black',\n        tooltip: msg.payload.callsign\n    }\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 100,
+        "x": 240,
+        "y": 220,
         "wires": [
             [
                 "c0fad167ebdb37d3"
@@ -747,8 +800,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 230,
-        "y": 220,
+        "x": 350,
+        "y": 100,
         "wires": [
             [
                 "cd5581187ae307dc"
@@ -774,8 +827,8 @@
         "links": [
             "f4812cfef757a9d5"
         ],
-        "x": 555,
-        "y": 260,
+        "x": 495,
+        "y": 220,
         "wires": []
     },
     {
@@ -791,7 +844,7 @@
         "lon": "-95.58",
         "zoom": "4",
         "layer": "OSMC",
-        "cluster": "5",
+        "cluster": "8",
         "maxage": "120",
         "usermenu": "hide",
         "layers": "show",
@@ -804,7 +857,7 @@
         "showruler": "false",
         "allowFileDrop": "false",
         "path": "/worldmap",
-        "overlist": "AC,HM",
+        "overlist": "HM",
         "maplist": "OSMG,OSMC,EsriC,EsriT",
         "mapname": "",
         "mapurl": "",
@@ -852,7 +905,8 @@
         "y": 120,
         "wires": [
             [
-                "25de052565052c07"
+                "25de052565052c07",
+                "1a32d3d96cc65f69"
             ]
         ]
     },
@@ -883,8 +937,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 3,
-        "x": 110,
-        "y": 320,
+        "x": 130,
+        "y": 220,
         "wires": [
             [],
             [],
@@ -1028,7 +1082,7 @@
         "finalize": "",
         "libs": [],
         "x": 290,
-        "y": 480,
+        "y": 280,
         "wires": [
             [
                 "d7f8c461006e1c88",
@@ -1051,8 +1105,8 @@
         "format": "{{msg.payload.name}}",
         "layout": "row-spread",
         "className": "",
-        "x": 480,
-        "y": 520,
+        "x": 460,
+        "y": 280,
         "wires": []
     },
     {
@@ -1068,8 +1122,8 @@
         "format": "{{msg.payload.position}}",
         "layout": "row-spread",
         "className": "",
-        "x": 470,
-        "y": 560,
+        "x": 450,
+        "y": 320,
         "wires": []
     },
     {
@@ -1085,8 +1139,8 @@
         "format": "{{msg.payload.heading}}",
         "layout": "row-spread",
         "className": "",
-        "x": 480,
-        "y": 600,
+        "x": 460,
+        "y": 360,
         "wires": []
     },
     {
@@ -1102,8 +1156,24 @@
         "format": "{{msg.payload.speed}}",
         "layout": "row-spread",
         "className": "",
-        "x": 470,
-        "y": 640,
+        "x": 450,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1a32d3d96cc65f69",
+        "type": "debug",
+        "z": "186846b5a2a991f0",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 260,
+        "y": 100,
         "wires": []
     },
     {
@@ -1143,11 +1213,11 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Aircraft DB Size",
+        "label": "Aircraft",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
-        "x": 560,
+        "x": 540,
         "y": 200,
         "wires": []
     },
@@ -1302,7 +1372,7 @@
         "label": "Invalid Decodes",
         "format": "{{value}}",
         "min": 0,
-        "max": "20",
+        "max": "50",
         "colors": [
             "#00b500",
             "#e6e600",
@@ -1395,7 +1465,7 @@
         "label": "Valid Decodes",
         "format": "{{value}}",
         "min": 0,
-        "max": "20",
+        "max": "50",
         "colors": [
             "#ca3838",
             "#e6e600",
