@@ -32,9 +32,17 @@
         "env": []
     },
     {
+        "id": "186846b5a2a991f0",
+        "type": "tab",
+        "label": "tracking ui",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "512c18dc94e9b9f2",
         "type": "tab",
-        "label": "dash",
+        "label": "metrics ui",
         "disabled": false,
         "info": "",
         "env": []
@@ -130,7 +138,7 @@
             "name": "ADS-B Plane Spotter",
             "hideToolbar": "false",
             "allowSwipe": "false",
-            "lockMenu": "false",
+            "lockMenu": "icon",
             "allowTempTheme": "true",
             "dateFormat": "DD/MM/YYYY",
             "sizes": {
@@ -150,17 +158,18 @@
         "type": "ui_group",
         "name": "Map",
         "tab": "29f52fb48096fb5b",
-        "order": 1,
+        "order": 2,
         "disp": false,
-        "width": "12",
+        "width": "16",
         "collapse": false,
         "className": ""
     },
     {
         "id": "29f52fb48096fb5b",
         "type": "ui_tab",
-        "name": "ADS-B Plane Spotter",
-        "icon": "dashboard",
+        "name": "Tracking",
+        "icon": "flight",
+        "order": 1,
         "disabled": false,
         "hidden": false
     },
@@ -168,7 +177,7 @@
         "id": "d8125f5c6daaf7c1",
         "type": "ui_group",
         "name": "Metrics",
-        "tab": "29f52fb48096fb5b",
+        "tab": "7b330efb1c7ce0be",
         "order": 3,
         "disp": false,
         "width": "4",
@@ -179,6 +188,57 @@
         "id": "c9d46ab0f13c902d",
         "type": "ui_group",
         "name": "Gauges",
+        "tab": "7b330efb1c7ce0be",
+        "order": 2,
+        "disp": false,
+        "width": "4",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "10fd428b4f841edf",
+        "type": "ui_group",
+        "name": "Charts",
+        "tab": "7b330efb1c7ce0be",
+        "order": 4,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e9819a8b9bb86236",
+        "type": "ui_spacer",
+        "z": "512c18dc94e9b9f2",
+        "name": "spacer",
+        "group": "d8125f5c6daaf7c1",
+        "order": 5,
+        "width": "2",
+        "height": "2"
+    },
+    {
+        "id": "7b330efb1c7ce0be",
+        "type": "ui_tab",
+        "name": "Metrics",
+        "icon": "business",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c268fbcc67049228",
+        "type": "ui_spacer",
+        "z": "512c18dc94e9b9f2",
+        "name": "spacer",
+        "group": "10fd428b4f841edf",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2bda240c05b3ad87",
+        "type": "ui_group",
+        "name": "Clocks",
         "tab": "29f52fb48096fb5b",
         "order": 2,
         "disp": false,
@@ -187,21 +247,15 @@
         "className": ""
     },
     {
-        "id": "28bdde5d389c0f33",
-        "type": "debug",
-        "z": "671265796388cccb",
-        "name": "source",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 160,
-        "wires": []
+        "id": "ee737d3b70a87b5d",
+        "type": "ui_group",
+        "name": "Aircraft Info",
+        "tab": "29f52fb48096fb5b",
+        "order": 3,
+        "disp": true,
+        "width": "4",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "446fc151487d9f43",
@@ -229,7 +283,6 @@
         "wires": [
             [
                 "a4bb77a00dceda5d",
-                "28bdde5d389c0f33",
                 "e7221cb7cdacb5b7"
             ]
         ]
@@ -274,7 +327,7 @@
         "type": "function",
         "z": "671265796388cccb",
         "name": "total msg cnt",
-        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn {topic:'metric/total-msg-cnt', payload: count};",
+        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn {topic:'total-msg-cnt', payload: count};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -381,8 +434,7 @@
         "y": 140,
         "wires": [
             [
-                "a32d0daf59374b65",
-                "77524dfb319b2763"
+                "a32d0daf59374b65"
             ]
         ]
     },
@@ -404,7 +456,7 @@
         "type": "function",
         "z": "258b1fca3e7e2415",
         "name": "decode msg count",
-        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn { topic: 'metric/decode-msg-cnt', payload: count };",
+        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn { topic: 'decode-msg-cnt', payload: count };",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -490,7 +542,7 @@
         "type": "function",
         "z": "258b1fca3e7e2415",
         "name": "decode err count",
-        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn { topic: 'metric/decode-err-cnt', payload: count };",
+        "func": "var count = context.get('n') || 0;\ncount++;\ncontext.set('n', count);\nreturn { topic: 'decode-err-cnt', payload: count };",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -515,23 +567,6 @@
         "wires": []
     },
     {
-        "id": "77524dfb319b2763",
-        "type": "debug",
-        "z": "258b1fca3e7e2415",
-        "name": "decode",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 600,
-        "y": 80,
-        "wires": []
-    },
-    {
         "id": "c320232d6f4e65ba",
         "type": "function",
         "z": "6da3a61d65c18cea",
@@ -551,8 +586,9 @@
         "y": 120,
         "wires": [
             [
-                "7414e495a0727518",
-                "764dd5b1f331d4f6"
+                "764dd5b1f331d4f6",
+                "1f99384bfd6a3e53",
+                "7414e495a0727518"
             ]
         ]
     },
@@ -577,14 +613,14 @@
         "type": "function",
         "z": "6da3a61d65c18cea",
         "name": "aircraft db size",
-        "func": "msg.topic = \"metric/aircraft-db-size\";\nmsg.payload = msg.payload.length;\nreturn msg;",
+        "func": "msg.topic = \"aircraft-db-size\";\nmsg.payload = msg.payload.length;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 320,
+        "y": 240,
         "wires": [
             [
                 "8620df5a1314021e"
@@ -602,12 +638,11 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 450,
-        "y": 160,
+        "x": 430,
+        "y": 120,
         "wires": [
             [
-                "ceae6a9de7f5f0eb",
-                "e5155c2c650f2b06"
+                "ceae6a9de7f5f0eb"
             ]
         ]
     },
@@ -633,7 +668,7 @@
         "links": [
             "cdf71fb3e31eee3d"
         ],
-        "x": 605,
+        "x": 555,
         "y": 300,
         "wires": []
     },
@@ -648,21 +683,23 @@
         "wires": []
     },
     {
-        "id": "e5155c2c650f2b06",
-        "type": "debug",
+        "id": "1f99384bfd6a3e53",
+        "type": "function",
         "z": "6da3a61d65c18cea",
-        "name": "store",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 80,
-        "wires": []
+        "name": "by airline",
+        "func": "const prefix = msg.payload.map(x => x.callsign.match(/[a-zA-Z]*/)[0]);\nconst data = {};\nvar total = 0;\n\nprefix.forEach(x => {\n    if (x && x !== 'N') {\n        isNaN(data[x]++) ? data[x] = 1 : data[x];\n        total++;\n    }\n});\nmsg.topic = 'count-by-airline';\nmsg.payload = data;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "8620df5a1314021e"
+            ]
+        ]
     },
     {
         "id": "3ae6211922f7134f",
@@ -685,7 +722,7 @@
         "type": "function",
         "z": "710f477a44faa728",
         "name": "-> aircraft object",
-        "func": "\nreturn {\n topic: 'aircraft record',\n payload: {\n        layer: 'aircracft',\n        name: msg.payload.callsign,\n        lat: msg.payload.lat,\n        lon: msg.payload.lng,\n        heading: msg.payload.heading,\n        icon: 'plane',\n        iconColor: 'black'\n    }\n};",
+        "func": "\nreturn {\n topic: 'aircraft record',\n payload: {\n     layer: 'aircraft',\n        name: msg.payload.callsign,\n        lat: msg.payload.lat,\n        lon: msg.payload.lng,\n        heading: msg.payload.heading,\n        speed: msg.payload.speed,\n        icon: 'plane',\n        iconColor: 'black',\n        tooltip: msg.payload.callsign,\n    }\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -695,28 +732,9 @@
         "y": 100,
         "wires": [
             [
-                "53f27d3bd77eead0",
-                "c0fad167ebdb37d3",
-                "28165994e8ba1279"
+                "c0fad167ebdb37d3"
             ]
         ]
-    },
-    {
-        "id": "53f27d3bd77eead0",
-        "type": "debug",
-        "z": "710f477a44faa728",
-        "name": "map",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 590,
-        "y": 80,
-        "wires": []
     },
     {
         "id": "be01aeb580340311",
@@ -761,43 +779,11 @@
         "wires": []
     },
     {
-        "id": "28165994e8ba1279",
-        "type": "worldmap",
-        "z": "710f477a44faa728",
-        "name": "",
-        "lat": "39.83",
-        "lon": "-98.58",
-        "zoom": "4",
-        "layer": "OSMC",
-        "cluster": "5",
-        "maxage": "120",
-        "usermenu": "hide",
-        "layers": "show",
-        "panit": "false",
-        "panlock": "false",
-        "zoomlock": "false",
-        "hiderightclick": "true",
-        "coords": "none",
-        "showgrid": "false",
-        "showruler": "false",
-        "allowFileDrop": "false",
-        "path": "/worldmap",
-        "overlist": "DR,SN,AC,HM",
-        "maplist": "OSMC",
-        "mapname": "",
-        "mapurl": "",
-        "mapopt": "",
-        "mapwms": false,
-        "x": 600,
-        "y": 140,
-        "wires": []
-    },
-    {
         "id": "7d947304f0096453",
         "type": "ui_worldmap",
-        "z": "512c18dc94e9b9f2",
+        "z": "186846b5a2a991f0",
         "group": "e9c61b6c290bbeef",
-        "order": 0,
+        "order": 1,
         "width": 0,
         "height": 0,
         "name": "",
@@ -817,33 +803,308 @@
         "showgrid": "false",
         "showruler": "false",
         "allowFileDrop": "false",
-        "path": "/dashmap",
+        "path": "/worldmap",
         "overlist": "AC,HM",
         "maplist": "OSMG,OSMC,EsriC,EsriT",
         "mapname": "",
         "mapurl": "",
         "mapopt": "",
         "mapwms": false,
-        "x": 345,
-        "y": 80,
+        "x": 475,
+        "y": 40,
         "wires": [],
         "l": false
     },
     {
         "id": "f4812cfef757a9d5",
         "type": "link in",
-        "z": "512c18dc94e9b9f2",
+        "z": "186846b5a2a991f0",
         "name": "dash in",
         "links": [
             "c0fad167ebdb37d3"
         ],
-        "x": 125,
-        "y": 100,
+        "x": 325,
+        "y": 40,
         "wires": [
             [
                 "7d947304f0096453"
             ]
         ]
+    },
+    {
+        "id": "d3c1cc1ae1eb6243",
+        "type": "comment",
+        "z": "186846b5a2a991f0",
+        "name": "track the aircraft",
+        "info": "",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7ebc8f1fdcd4960b",
+        "type": "worldmap in",
+        "z": "186846b5a2a991f0",
+        "name": "",
+        "path": "/worldmap",
+        "events": "point,other",
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "25de052565052c07"
+            ]
+        ]
+    },
+    {
+        "id": "25de052565052c07",
+        "type": "switch",
+        "z": "186846b5a2a991f0",
+        "name": "",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "addlayer",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "bounds",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "click",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [],
+            [],
+            [
+                "9bd85215974492d3"
+            ]
+        ]
+    },
+    {
+        "id": "dbe71f37de02dfde",
+        "type": "ui_clock",
+        "z": "186846b5a2a991f0",
+        "name": "Local",
+        "group": "2bda240c05b3ad87",
+        "order": 2,
+        "width": "2",
+        "height": "2",
+        "x": 610,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "39d9bb1d6320aa77",
+        "type": "inject",
+        "z": "186846b5a2a991f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "dbe71f37de02dfde",
+                "8789d57adfad0f24"
+            ]
+        ]
+    },
+    {
+        "id": "4d85c46b81803e92",
+        "type": "ui_clock",
+        "z": "186846b5a2a991f0",
+        "name": "UTC",
+        "group": "2bda240c05b3ad87",
+        "order": 2,
+        "width": "2",
+        "height": "2",
+        "x": 610,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8789d57adfad0f24",
+        "type": "function",
+        "z": "186846b5a2a991f0",
+        "name": "-> utc",
+        "func": "const adj = context.get('offset') * 60 * 1000;\nmsg.payload = msg.payload - adj;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('offset', 300)",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "4d85c46b81803e92"
+            ]
+        ]
+    },
+    {
+        "id": "5cea93c0ee7c21d1",
+        "type": "ui_button",
+        "z": "186846b5a2a991f0",
+        "name": "",
+        "group": "2bda240c05b3ad87",
+        "order": 2,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "Local",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 610,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e23fb6b3cbdba00c",
+        "type": "ui_button",
+        "z": "186846b5a2a991f0",
+        "name": "",
+        "group": "2bda240c05b3ad87",
+        "order": 2,
+        "width": "2",
+        "height": "1",
+        "passthru": false,
+        "label": "UTC",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 610,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9bd85215974492d3",
+        "type": "function",
+        "z": "186846b5a2a991f0",
+        "name": "munge",
+        "func": "msg.payload.position = `${msg.payload.lat.toFixed(4)}, ${msg.payload.lon.toFixed(4)}`\nmsg.payload.heading = `${msg.payload.heading.toFixed(1)}&#176;`;\nmsg.payload.speed = msg.payload.speed.toFixed(0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "d7f8c461006e1c88",
+                "2de321028e97ca1b",
+                "f030d6f26854807f",
+                "4ffdab5187e41259"
+            ]
+        ]
+    },
+    {
+        "id": "d7f8c461006e1c88",
+        "type": "ui_text",
+        "z": "186846b5a2a991f0",
+        "group": "ee737d3b70a87b5d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Callsign",
+        "format": "{{msg.payload.name}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 460,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2de321028e97ca1b",
+        "type": "ui_text",
+        "z": "186846b5a2a991f0",
+        "group": "ee737d3b70a87b5d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Pos",
+        "format": "{{msg.payload.position}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f030d6f26854807f",
+        "type": "ui_text",
+        "z": "186846b5a2a991f0",
+        "group": "ee737d3b70a87b5d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Heading",
+        "format": "{{msg.payload.heading}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 460,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "4ffdab5187e41259",
+        "type": "ui_text",
+        "z": "186846b5a2a991f0",
+        "group": "ee737d3b70a87b5d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Speed",
+        "format": "{{msg.payload.speed}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 450,
+        "y": 400,
+        "wires": []
     },
     {
         "id": "4681187b1ea43383",
@@ -865,11 +1126,10 @@
             "741e11795aa36009",
             "8620df5a1314021e"
         ],
-        "x": 125,
-        "y": 160,
+        "x": 115,
+        "y": 280,
         "wires": [
             [
-                "8fce727ed7978580",
                 "deb898041f45ca1f"
             ]
         ]
@@ -888,24 +1148,7 @@
         "layout": "row-spread",
         "className": "",
         "x": 560,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "8fce727ed7978580",
-        "type": "debug",
-        "z": "512c18dc94e9b9f2",
-        "name": "dash",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 100,
+        "y": 200,
         "wires": []
     },
     {
@@ -918,34 +1161,38 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "metric/total-msg-cnt",
+                "v": "total-msg-cnt",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "metric/decode-msg-cnt",
+                "v": "decode-msg-cnt",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "metric/decode-err-cnt",
+                "v": "decode-err-cnt",
                 "vt": "str"
             },
             {
                 "t": "eq",
-                "v": "metric/aircraft-db-size",
+                "v": "aircraft-db-size",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "count-by-airline",
                 "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 4,
-        "x": 260,
-        "y": 220,
+        "outputs": 5,
+        "x": 140,
+        "y": 140,
         "wires": [
             [
-                "85c3a0ab65f91835",
-                "4193bbcef7665cc6"
+                "85c3a0ab65f91835"
             ],
             [
                 "d0d9b238b1302f1f",
@@ -957,6 +1204,9 @@
             ],
             [
                 "047aa5d3fcd29b98"
+            ],
+            [
+                "da26da98890843e7"
             ]
         ]
     },
@@ -974,7 +1224,7 @@
         "layout": "row-spread",
         "className": "",
         "x": 550,
-        "y": 200,
+        "y": 80,
         "wires": []
     },
     {
@@ -991,7 +1241,7 @@
         "layout": "row-spread",
         "className": "",
         "x": 560,
-        "y": 240,
+        "y": 120,
         "wires": []
     },
     {
@@ -1008,36 +1258,8 @@
         "layout": "row-spread",
         "className": "",
         "x": 560,
-        "y": 280,
+        "y": 160,
         "wires": []
-    },
-    {
-        "id": "4193bbcef7665cc6",
-        "type": "change",
-        "z": "512c18dc94e9b9f2",
-        "name": "total",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "total",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 270,
-        "y": 360,
-        "wires": [
-            [
-                "9ee2452994f76996",
-                "c8ae16ee89798ddf"
-            ]
-        ]
     },
     {
         "id": "35d8f3e4821c5359",
@@ -1058,36 +1280,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 400,
-        "wires": [
-            [
-                "9ee2452994f76996"
-            ]
-        ]
-    },
-    {
-        "id": "9ee2452994f76996",
-        "type": "join",
-        "z": "512c18dc94e9b9f2",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 430,
-        "y": 380,
+        "x": 310,
+        "y": 260,
         "wires": [
             [
                 "1b89eb3b91197ccd"
@@ -1104,11 +1298,11 @@
         "width": 0,
         "height": 0,
         "gtype": "gage",
-        "title": "Error Rate",
-        "label": "units",
+        "title": "Errors / Sec",
+        "label": "Invalid Decodes",
         "format": "{{value}}",
         "min": 0,
-        "max": "1",
+        "max": "20",
         "colors": [
             "#00b500",
             "#e6e600",
@@ -1118,8 +1312,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 630,
-        "y": 400,
+        "x": 590,
+        "y": 260,
         "wires": []
     },
     {
@@ -1127,14 +1321,14 @@
         "type": "function",
         "z": "512c18dc94e9b9f2",
         "name": "set rate",
-        "func": "msg.payload = (msg.payload.count / msg.payload.total).toFixed(2);\nreturn msg;",
+        "func": "const t = (Date.now() - context.get('start')) / 1000;\nconst n = msg.payload;\n\nmsg.topic = 'errors-per-sec';\nmsg.payload = Number.parseFloat(n / t).toFixed(0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('start', Date.now())",
         "finalize": "",
         "libs": [],
-        "x": 460,
-        "y": 460,
+        "x": 440,
+        "y": 260,
         "wires": [
             [
                 "c91c4b79cc18e040"
@@ -1160,36 +1354,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
-        "y": 500,
-        "wires": [
-            [
-                "c8ae16ee89798ddf"
-            ]
-        ]
-    },
-    {
-        "id": "c8ae16ee89798ddf",
-        "type": "join",
-        "z": "512c18dc94e9b9f2",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 410,
-        "y": 520,
+        "x": 300,
+        "y": 300,
         "wires": [
             [
                 "9be751f9d9db6c23"
@@ -1201,14 +1367,14 @@
         "type": "function",
         "z": "512c18dc94e9b9f2",
         "name": "set rate",
-        "func": "msg.payload = (msg.payload.count / msg.payload.total).toFixed(2);\nreturn msg;",
+        "func": "const t = (Date.now() - context.get('start'))/1000;\nconst n = msg.payload;\n\nmsg.topic = 'msgs-per-sec';\nmsg.payload = Number.parseFloat(n / t).toFixed(0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('start', Date.now())",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 580,
+        "x": 440,
+        "y": 300,
         "wires": [
             [
                 "19509262f5feaea1"
@@ -1225,22 +1391,85 @@
         "width": 0,
         "height": 0,
         "gtype": "gage",
-        "title": "Decode Rate",
-        "label": "units",
+        "title": "Decodes / Sec",
+        "label": "Valid Decodes",
         "format": "{{value}}",
         "min": 0,
-        "max": "1",
+        "max": "20",
         "colors": [
-            "#00b500",
+            "#ca3838",
             "#e6e600",
-            "#ca3838"
+            "#00b500"
         ],
         "seg1": "",
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 630,
-        "y": 540,
+        "x": 590,
+        "y": 300,
         "wires": []
+    },
+    {
+        "id": "da26da98890843e7",
+        "type": "function",
+        "z": "512c18dc94e9b9f2",
+        "name": "-> series",
+        "func": "const chart = {series:['by-reg'], data:[], labels:[]};\n\nfor (const key in msg.payload) {\n    if (msg.payload.hasOwnProperty(key)) {\n        chart.labels.push(key);\n        chart.data.push(msg.payload[key]);\n    }\n}\nchart.data = [chart.data];\nmsg.payload = [chart];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "030f343337df56a5"
+            ]
+        ]
+    },
+    {
+        "id": "030f343337df56a5",
+        "type": "ui_chart",
+        "z": "512c18dc94e9b9f2",
+        "name": "",
+        "group": "10fd428b4f841edf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "pie",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 530,
+        "y": 380,
+        "wires": [
+            []
+        ]
     }
 ]
