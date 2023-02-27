@@ -582,7 +582,7 @@
                 "module": "mode-s-aircraft-store"
             }
         ],
-        "x": 340,
+        "x": 400,
         "y": 100,
         "wires": [
             []
@@ -634,7 +634,7 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 490,
+        "x": 410,
         "y": 180,
         "wires": [
             [
@@ -775,7 +775,7 @@
         "type": "function",
         "z": "710f477a44faa728",
         "name": "-> aircraft object",
-        "func": "\nreturn {\n topic: 'aircraft record',\n payload: {\n        name: msg.payload.callsign,\n        lat: msg.payload.lat,\n        lon: msg.payload.lng,\n        heading: msg.payload.heading,\n        speed: msg.payload.speed,\n        icon: 'plane',\n        iconColor: 'black',\n        tooltip: msg.payload.callsign\n    }\n};",
+        "func": "\nreturn {\n topic: 'aircraft',\n payload: {\n        layer:'aircraft',\n        name: msg.payload.callsign,\n        lat: msg.payload.lat,\n        lon: msg.payload.lng,\n        heading: msg.payload.heading,\n        speed: msg.payload.speed,\n        icon: 'plane',\n        iconColor: 'black',\n        tooltip: msg.payload.callsign\n    }\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -900,7 +900,7 @@
         "z": "186846b5a2a991f0",
         "name": "",
         "path": "/worldmap",
-        "events": "point,other",
+        "events": "connect,disconnect,bounds,other",
         "x": 100,
         "y": 120,
         "wires": [
@@ -920,12 +920,22 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "addlayer",
+                "v": "connected",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "disconnect",
                 "vt": "str"
             },
             {
                 "t": "eq",
                 "v": "bounds",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "addlayer",
                 "vt": "str"
             },
             {
@@ -936,11 +946,20 @@
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 3,
-        "x": 130,
-        "y": 220,
+        "outputs": 5,
+        "x": 110,
+        "y": 360,
         "wires": [
-            [],
+            [
+                "c7a23f2effce5628",
+                "54b210b68c37e357"
+            ],
+            [
+                "54b210b68c37e357"
+            ],
+            [
+                "19b559fc9d3b8908"
+            ],
             [],
             [
                 "9bd85215974492d3"
@@ -1074,15 +1093,15 @@
         "id": "9bd85215974492d3",
         "type": "function",
         "z": "186846b5a2a991f0",
-        "name": "munge",
+        "name": "click",
         "func": "msg.payload.position = `${msg.payload.lat.toFixed(4)}, ${msg.payload.lon.toFixed(4)}`\nmsg.payload.heading = `${msg.payload.heading.toFixed(1)}&#176;`;\nmsg.payload.speed = msg.payload.speed.toFixed(0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 290,
-        "y": 280,
+        "x": 270,
+        "y": 420,
         "wires": [
             [
                 "d7f8c461006e1c88",
@@ -1105,8 +1124,8 @@
         "format": "{{msg.payload.name}}",
         "layout": "row-spread",
         "className": "",
-        "x": 460,
-        "y": 280,
+        "x": 440,
+        "y": 420,
         "wires": []
     },
     {
@@ -1122,8 +1141,8 @@
         "format": "{{msg.payload.position}}",
         "layout": "row-spread",
         "className": "",
-        "x": 450,
-        "y": 320,
+        "x": 430,
+        "y": 460,
         "wires": []
     },
     {
@@ -1139,8 +1158,8 @@
         "format": "{{msg.payload.heading}}",
         "layout": "row-spread",
         "className": "",
-        "x": 460,
-        "y": 360,
+        "x": 440,
+        "y": 500,
         "wires": []
     },
     {
@@ -1156,8 +1175,8 @@
         "format": "{{msg.payload.speed}}",
         "layout": "row-spread",
         "className": "",
-        "x": 450,
-        "y": 400,
+        "x": 430,
+        "y": 540,
         "wires": []
     },
     {
@@ -1165,7 +1184,7 @@
         "type": "debug",
         "z": "186846b5a2a991f0",
         "name": "debug 3",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1175,6 +1194,61 @@
         "x": 260,
         "y": 100,
         "wires": []
+    },
+    {
+        "id": "c7a23f2effce5628",
+        "type": "function",
+        "z": "186846b5a2a991f0",
+        "name": "connected",
+        "func": "const bounds = flow.get('bounds');\nif(!bounds){\n    return null;\n}\nmsg.payload = {\n    command:{\n        zoom: bounds.zoom,\n        bounds: [[bounds.south, bounds.west],\n                 [bounds.north, bounds.east]]\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "7d947304f0096453",
+                "54b210b68c37e357"
+            ]
+        ]
+    },
+    {
+        "id": "54b210b68c37e357",
+        "type": "debug",
+        "z": "186846b5a2a991f0",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "19b559fc9d3b8908",
+        "type": "function",
+        "z": "186846b5a2a991f0",
+        "name": "bounds",
+        "func": "flow.set('bounds', msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "54b210b68c37e357"
+            ]
+        ]
     },
     {
         "id": "4681187b1ea43383",
